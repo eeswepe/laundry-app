@@ -37,16 +37,31 @@ class AdminController {
             exit();
         }
 
-        $unfinishedLaundryCount = $this->laundryModel->getUnfinishedLaundryCount();
+        $notProcessedLaundryCount = $this->laundryModel->getNotProcessedLaundryCount();
+        $inProgressLaundryCount = $this->laundryModel->getInProgressLaundryCount();
+        $finishedLaundryCount = $this->laundryModel->getFinishedLaundryCount();
         $unpaidLaundryCount = $this->laundryModel->getUnpaidLaundryCount();
+
+        $statusFilter = isset($_GET['status']) ? $_GET['status'] : '';
+        
+        $searchId = isset($_GET['search_id']) ? $_GET['search_id'] : '';
 
         $limit = 10;
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
         $offset = ($page -1) * $limit;
-
-        $laundries = $this->laundryModel->getAllLaundry($limit, $offset);
         $totalLaundry = $this->laundryModel->getTotalLaundry();
         $totalPages = ceil($totalLaundry / $limit);
+
+        if ($searchId) {
+            $laundries = $this->laundryModel->getLaundryById($searchId);
+        } else if ($statusFilter) {
+            $laundries = $this->laundryModel->getLaundryByStatus($statusFilter, $limit, $offset);
+        } else {
+            $laundries = $this->laundryModel->getAllLaundry($limit, $offset);
+        }
+
+
+
         require '../app/views/admin/dashboard.php';
     }
 
@@ -64,6 +79,45 @@ class AdminController {
         if(isset($_GET['id'])) {
             $id = (int)$_GET['id'];
             $this->laundryModel->deleteLaundry($id);
+        }
+        header('Location: /laundry-app/admin/dashboard');
+        exit();
+    }
+
+    public function markInProgress(){
+        if(!isset($_SESSION['admin_logged_in'])) {
+            header('Location: /laundry-app/admin/login');
+            exit();
+        }
+        if(isset($_GET['id'])) {
+            $id = (int)$_GET['id'];
+            $this->laundryModel->updateLaundryStatus($id, 'In Progress');
+        }
+        header('Location: /laundry-app/admin/dashboard');
+        exit();
+    }   
+
+    public function markFinished(){
+        if(!isset($_SESSION['admin_logged_in'])) {
+            header('Location: /laundry-app/admin/login');
+            exit();
+        }
+        if(isset($_GET['id'])) {
+            $id = (int)$_GET['id'];
+            $this->laundryModel->updateLaundryStatus($id, 'Finished');
+        }
+        header('Location: /laundry-app/admin/dashboard');
+        exit();
+    }
+
+    public function markPaid(){
+        if(!isset($_SESSION['admin_logged_in'])) {
+            header('Location: /laundry-app/admin/login');
+            exit();
+        }
+        if(isset($_GET['id'])) {
+            $id = (int)$_GET['id'];
+            $this->laundryModel->updateLaundryIsPaid($id);
         }
         header('Location: /laundry-app/admin/dashboard');
         exit();

@@ -11,7 +11,7 @@ $url = isset($_GET['url']) ? $_GET['url'] : '';
 
 // Routing sederhana
 switch ($url) {
-
+// admin 
     case 'admin/login':
         $adminController->login();
         break;
@@ -28,6 +28,16 @@ switch ($url) {
     case 'admin/delete':
         $adminController->deleteLaundry();
         break;
+    case 'admin/mark-in-progress':
+        $adminController->markInProgress();
+        break;
+    case 'admin/mark-finished':
+        $adminController->markFinished();
+        break;
+    case 'admin/mark-paid':
+        $adminController->markPaid();
+        break;
+// user
     case '':
         $laundryController->index();
         break;

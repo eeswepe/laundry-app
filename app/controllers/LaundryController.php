@@ -29,13 +29,21 @@ class LaundryController {
     }
 
     public function list() {
+        $searchId = isset($_GET['search_id']) ? $_GET['search_id'] : '';
+
         $limit = 20;
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
         $offset = ($page -1) * $limit;
 
-        $laundries = $this->laundryModel->getAllLaundry($limit, $offset);
         $totalLaundry = $this->laundryModel->getTotalLaundry();
         $totalPages = ceil($totalLaundry / $limit);
+
+        if ($searchId) {
+            $laundries = $this->laundryModel->getLaundryById($searchId);
+        } else {
+            $laundries = $this->laundryModel->getAllLaundry($limit, $offset);
+        }
+
         require '../app/views/list.php';
     }
 }
