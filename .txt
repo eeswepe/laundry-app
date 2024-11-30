@@ -1,0 +1,15 @@
+CREATE TABLE orders (
+    id INTEGER PRIMARY KEY,
+    nama VARCHAR(255) NOT NULL,
+    nomor_hp VARCHAR(15) NOT NULL,
+    alamat VARCHAR(255) NOT NULL,
+    layanan VARCHAR(255) NOT NULL,
+    rincian_pesanan VARCHAR(255) NOT NULL,
+    metode_pembayaran VARCHAR(255) NOT NULL,
+    is_finish BOOLEAN NOT NULL DEFAULT FALSE,
+    is_paid BOOLEAN NOT NULL DEFAULT FALSE
+);
+
+
+INSERT INTO pesanan (nomor_hp, alamat, layanan, rincian_pesanan, metode_pembayaran) VALUES ('081234567890', 'Jl. Raya Jakarta No. 123', 'Cuci Kering', 'Baju 5 pcs', 'Tunai');
+
