@@ -36,7 +36,17 @@ class AdminController {
             header('Location: /laundry-app/admin/login');
             exit();
         }
-        $laundries = $this->laundryModel->getAllLaundry();
+
+        $unfinishedLaundryCount = $this->laundryModel->getUnfinishedLaundryCount();
+        $unpaidLaundryCount = $this->laundryModel->getUnpaidLaundryCount();
+
+        $limit = 10;
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $offset = ($page -1) * $limit;
+
+        $laundries = $this->laundryModel->getAllLaundry($limit, $offset);
+        $totalLaundry = $this->laundryModel->getTotalLaundry();
+        $totalPages = ceil($totalLaundry / $limit);
         require '../app/views/admin/dashboard.php';
     }
 
@@ -45,5 +55,19 @@ class AdminController {
         header('Location: /laundry-app/admin/login');
         exit();
     }
+
+    public function deleteLaundry(){
+        if(!isset($_SESSION['admin_logged_in'])) {
+            header('Location: /laundry-app/admin/login');
+            exit();
+        }
+        if(isset($_GET['id'])) {
+            $id = (int)$_GET['id'];
+            $this->laundryModel->deleteLaundry($id);
+        }
+        header('Location: /laundry-app/admin/dashboard');
+        exit();
+    }
+
 }
 ?>

@@ -1,37 +1,65 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Welcome to Admin Dashboard</h1>
-    <a href="/laundry-app/public/index.php?url=admin/logout">Logout</a>
-    <h2>Laundry List</h2>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Nama</th>
-            <th>Nomor HP</th>
-            <th>Alamat</th>
-            <th>Layanan</th>
-            <th>Rincian Pesanan</th>
-            <th>Metode Pembayaran</th>
-            <th>Selesai</th>
-            <th>Dibayar</th>
-        </tr>
-        <?php foreach ($laundries as $laundry): ?>
-        <tr>
-            <td><?php echo htmlspecialchars($laundry['id']); ?></td>
-            <td><?php echo htmlspecialchars($laundry['nama']); ?></td>
-            <td><?php echo htmlspecialchars($laundry['nomor_hp']); ?></td>
-            <td><?php echo htmlspecialchars($laundry['alamat']); ?></td>
-            <td><?php echo htmlspecialchars($laundry['layanan']); ?></td>
-            <td><?php echo htmlspecialchars($laundry['rincian_pesanan']); ?></td>
-            <td><?php echo htmlspecialchars($laundry['metode_pembayaran']); ?></td>
-            <td><?php echo htmlspecialchars($laundry['is_finish'] ? 'Yes' : 'No'); ?></td>
-            <td><?php echo htmlspecialchars($laundry['is_paid'] ? 'Yes' : 'No'); ?></td>
-        </tr>
-        <?php endforeach; ?>
-    </table>
+<body class="bg-gray-100 p-6">
+    <h1 class="text-2xl font-bold mb-4">Welcome to Admin Dashboard</h1>
+    <div class="flex space-x-4 mb-4">
+        <div class="bg-white shadow-md rounded-lg p-4 flex-1">
+            <h3 class="text-lg font-semibold mb-2">Laundry yang belum selesai</h3>
+            <p class="text-2xl font-bold"><?php echo $unfinishedLaundryCount; ?></p>
+        </div>
+        <div class="bg-white shadow-md rounded-lg p-4 flex-1">
+            <h3 class="text-lg font-semibold mb-2">Laundry yang belum dibayar</h3>
+            <p class="text-2xl font-bold"><?php echo $unpaidLaundryCount; ?></p>
+        </div>
+    </div>
+    <div class="mb-4">
+        <a href="/laundry-app/add" class="text-blue-500 hover:underline">Tambah Laundry</a>
+        <a href="/laundry-app/admin/logout" class="text-blue-500 hover:underline">Logout</a>
+    </div>
+    <h2 class="text-xl font-semibold mb-4">Daftar Laundry</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <?php if (!empty($laundries)): ?>
+            <?php foreach ($laundries as $laundry): ?>
+                <div class="bg-white shadow-md rounded-lg p-4">
+                    <h3 class="font-bold text-lg"><?php echo htmlspecialchars($laundry['nama']); ?></h3>
+                    <p><strong>ID:</strong> <?php echo htmlspecialchars($laundry['id']); ?></p>
+                    <p><strong>Nomor HP:</strong> <?php echo htmlspecialchars($laundry['nomor_hp']); ?></p>
+                    <p><strong>Alamat:</strong> <?php echo htmlspecialchars($laundry['alamat']); ?></p>
+                    <p><strong>Layanan:</strong> <?php echo htmlspecialchars($laundry['layanan']); ?></p>
+                    <p><strong>Rincian Pesanan:</strong> <?php echo htmlspecialchars($laundry['rincian_pesanan']); ?></p>
+                    <p><strong>Metode Pembayaran:</strong> <?php echo htmlspecialchars($laundry['metode_pembayaran']); ?></p>
+                    <p><strong>Tanggal Pemesanan:</strong> <?php echo htmlspecialchars(date('d-m-Y', strtotime($laundry['order_date']))); ?></p>
+                    <p><strong>Selesai:</strong> <?php echo htmlspecialchars($laundry['is_finish'] ? 'Yes' : 'No'); ?></p>
+                    <p><strong>Dibayar:</strong> <?php echo htmlspecialchars($laundry['is_paid'] ? 'Yes' : 'No'); ?></p>
+                    <div class="mt-4 flex space-x-2">
+                        <a href="/laundry-app/admin/mark-finished&id=<?php echo $laundry['id']; ?>" class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">Tandai Selesai</a>
+                        <a href="/laundry-app/admin/mark-paid&id=<?php echo $laundry['id']; ?>" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Tandai Dibayar</a>
+                        <a href="/laundry-app/admin/delete&id=<?php echo $laundry['id']; ?>" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Hapus</a>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <div class="col-span-1 sm:col-span-2 lg:col-span-3 bg-white shadow-md rounded-lg p-4">
+                <p class="text-center">Tidak ada data laundry.</p>
+            </div>
+        <?php endif; ?>
+    </div>
+    <div class="mt-6">
+        <h3 class="text-lg font-semibold">Halaman:</h3>
+        <div class="flex space-x-2">
+            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <a href="/laundry-app/admin/dashboard&page=<?php echo $i; ?>" class="text-blue-500 hover:underline"><?php echo $i; ?></a>
+                <?php if ($i < $totalPages): ?>
+                    <span>|</span>
+                <?php endif; ?>
+            <?php endfor; ?>
+        </div>
+    </div>
 </body>
 </html>

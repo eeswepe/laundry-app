@@ -25,7 +25,9 @@ switch ($url) {
     case 'admin/logout':
         $adminController->logout();
         break;
-
+    case 'admin/delete':
+        $adminController->deleteLaundry();
+        break;
     case '':
         $laundryController->index();
         break;

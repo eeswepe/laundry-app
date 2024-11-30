@@ -22,14 +22,20 @@ class LaundryController {
             $rincian_pesanan = $_POST['rincian_pesanan'];
             $payment_method = $_POST['metode_pembayaran'];
             $this->laundryModel->addLaundry($nama, $nomor_hp, $alamat, $layanan, $rincian_pesanan, $payment_method);
-            header("Location: /laundry-app/public/index.php");
+            header("Location: /laundry-app/list");
             exit();
         }
         require '../app/views/add.php';
     }
 
     public function list() {
-        $laundryList = $this->laundryModel->getAllLaundry();
+        $limit = 20;
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $offset = ($page -1) * $limit;
+
+        $laundries = $this->laundryModel->getAllLaundry($limit, $offset);
+        $totalLaundry = $this->laundryModel->getTotalLaundry();
+        $totalPages = ceil($totalLaundry / $limit);
         require '../app/views/list.php';
     }
 }

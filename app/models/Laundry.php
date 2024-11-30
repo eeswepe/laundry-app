@@ -18,9 +18,34 @@ class Laundry {
         ]);
     }
 
-    public function getAllLaundry() {
-        $stmt = $this->pdo->query("SELECT * FROM orders");
+    public function getAllLaundry($limit, $offset) {
+        $stmt = $this->pdo->prepare("SELECT * FROM orders ORDER BY order_date DESC LIMIT :limit OFFSET :offset");
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getTotalLaundry() {
+        $stmt = $this->pdo->query("SELECT COUNT(*) FROM orders");
+        return $stmt->fetchColumn();
+    }
+
+    public function deleteLaundry($id) {
+        $stmt = $this->pdo->prepare("DELETE FROM orders WHERE id = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
+    public function getUnfinishedLaundryCount() {
+        $stmt = $this->pdo->query("SELECT COUNT(*) FROM orders WHERE is_finish = 0");
+        return $stmt->fetchColumn();
+    }
+
+    public function getUnpaidLaundryCount() {
+        $stmt = $this->pdo->query("SELECT COUNT(*) FROM orders WHERE is_paid = 0");
+        return $stmt->fetchColumn();
+    }
+
 }
 ?>
