@@ -16,8 +16,10 @@ switch ($url) {
         $laundryController->add();
         break;
     case 'list':
-    default:
         $laundryController->list();
+        break;
+    default:
+         $laundryController->index();
         break;
 }
 ?>
