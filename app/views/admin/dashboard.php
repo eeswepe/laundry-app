@@ -69,13 +69,21 @@
                     <p><strong>Metode Pembayaran:</strong> <?php echo htmlspecialchars($laundry['metode_pembayaran']); ?></p>
                     <p><strong>Tanggal Pemesanan:</strong> <?php echo htmlspecialchars(date('d-m-Y', strtotime($laundry['order_date']))); ?></p>
                     <p><strong>Selesai:</strong> <?php echo htmlspecialchars($laundry['status']); ?></p>
-                    <p><strong>Dibayar:</strong> <?php echo htmlspecialchars($laundry['is_paid'] ? 'Yes' : 'No'); ?></p>
+                    <p><strong>Dibayar:</strong> <?php echo htmlspecialchars($laundry['is_paid'] ? 'Sudah Dibayar' : 'Belum Dibayar'); ?></p>
+                    <p><strong>Biaya:</strong> Rp.<?php echo htmlspecialchars($laundry['biaya']); ?></p>
                     <div class="mt-4 flex space-x-2">
                         <a href="/laundry-app/admin/mark-in-progress&id=<?php echo $laundry['id']; ?>" class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600">Tandai Diproses</a>
                         <a href="/laundry-app/admin/mark-finished&id=<?php echo $laundry['id']; ?>" class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">Tandai Selesai</a>
                         <a href="/laundry-app/admin/mark-paid&id=<?php echo $laundry['id']; ?>" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Tandai Dibayar</a>
                         <a href="/laundry-app/admin/delete&id=<?php echo $laundry['id']; ?>" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Hapus</a>
                     </div>
+                    <form action="/laundry-app/admin/update-biaya" method="GET" class="mt-4">
+                        <input type="hidden" name="id" value="<?php echo $laundry['id']; ?>">
+                        <div class="flex space-x-2">
+                            <input type="number" name="biaya" placeholder="Biaya laundry" class="border rounded p-2 w-1/2" required oninput="this.value = this.value.replace(/[^0-9]/g, '');" style="-webkit-appearance: none; -moz-appearance: textfield;">
+                            <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Update Biaya</button>
+                        </div>
+                    </form>
                 </div>
             <?php endforeach; ?>
         <?php else: ?>

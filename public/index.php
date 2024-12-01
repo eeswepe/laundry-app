@@ -37,6 +37,9 @@ switch ($url) {
     case 'admin/mark-paid':
         $adminController->markPaid();
         break;
+    case 'admin/update-biaya':
+        $adminController->updateBiaya();
+        break;
 // user
     case '':
         $laundryController->index();

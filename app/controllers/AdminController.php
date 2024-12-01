@@ -2,6 +2,7 @@
 session_start();
 
 require_once '../app/models/Laundry.php';
+require_once '../app/utils/QRIS_handler.php';
 
 class AdminController {
     private $laundryModel;
@@ -91,7 +92,7 @@ class AdminController {
         }
         if(isset($_GET['id'])) {
             $id = (int)$_GET['id'];
-            $this->laundryModel->updateLaundryStatus($id, 'In Progress');
+            $this->laundryModel->updateLaundryStatus($id, 'Sedang Diproses');
         }
         header('Location: /laundry-app/admin/dashboard');
         exit();
@@ -104,7 +105,7 @@ class AdminController {
         }
         if(isset($_GET['id'])) {
             $id = (int)$_GET['id'];
-            $this->laundryModel->updateLaundryStatus($id, 'Finished');
+            $this->laundryModel->updateLaundryStatus($id, 'Selesai');
         }
         header('Location: /laundry-app/admin/dashboard');
         exit();
@@ -118,6 +119,28 @@ class AdminController {
         if(isset($_GET['id'])) {
             $id = (int)$_GET['id'];
             $this->laundryModel->updateLaundryIsPaid($id);
+        }
+        header('Location: /laundry-app/admin/dashboard');
+        exit();
+    }
+
+    public function updateBiaya(){
+        if(!isset($_SESSION['admin_logged_in'])) {
+            header('Location: /laundry-app/admin/login');
+            exit();
+        }
+        if(isset($_GET['id']) && isset($_GET['biaya'])) {
+            $id = (int)$_GET['id'];
+            $biaya = (int)$_GET['biaya'];
+
+            $qris = "00020101021126570011ID.DANA.WWW011893600915302259148102090225914810303UMI51440014ID.CO.QRIS.WWW0215ID10200176114730303UMI5204581253033605802ID5922Warung Sayur Bu Sugeng6010Kab. Demak610559567630458C7";            
+            $nominal = $biaya;
+            $admin = 'n';
+
+            
+            $qrisHandler = new QRISHandler();
+            $imagePath = $qrisHandler->generateQRCode($qris, $nominal, $admin, $id);
+            $this->laundryModel->updateBiayaLaundry($id, $biaya);
         }
         header('Location: /laundry-app/admin/dashboard');
         exit();

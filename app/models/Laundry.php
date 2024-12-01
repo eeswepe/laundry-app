@@ -7,7 +7,7 @@ class Laundry {
     }
 
     public function addLaundry($nama, $owner, $alamat, $layanan, $rincian_pesanan, $payment_method) {
-        $stmt = $this->pdo->prepare("INSERT INTO orders (nama, nomor_hp, alamat, layanan, rincian_pesanan, metode_pembayaran, status, is_paid) VALUES (:nama, :owner, :alamat, :layanan, :rincian_pesanan, :payment_method, 'Not Processed', 0)");
+        $stmt = $this->pdo->prepare("INSERT INTO orders (nama, nomor_hp, alamat, layanan, rincian_pesanan, metode_pembayaran, status, is_paid, biaya) VALUES (:nama, :owner, :alamat, :layanan, :rincian_pesanan, :payment_method, 'Belum Diproses', 0, 0)");
         $stmt->execute([
             ':nama' => $nama,
             ':owner' => $owner,
@@ -55,6 +55,13 @@ class Laundry {
     public function updateLaundryIsPaid($id) {
         $stmt = $this->pdo->prepare("UPDATE orders SET is_paid = 1 WHERE id = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
+    public function updateBiayaLaundry($id, $biaya) {
+        $stmt = $this->pdo->prepare("UPDATE orders SET biaya = :biaya WHERE id = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':biaya', $biaya, PDO::PARAM_INT);
         $stmt->execute();
     }
 

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laundry List</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
 </head>
 <body class="bg-gray-100 p-5">
     <h1 class="text-3xl font-bold mb-4">Laundry List</h1>
@@ -24,6 +25,7 @@
                 <th class="py-2 px-4">Metode Pembayaran</th>
                 <th class="py-2 px-4">Status</th>
                 <th class="py-2 px-4">Dibayar</th>
+                <th class="py-2 px-4">Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -35,12 +37,15 @@
                         <td class="py-2 px-4 border-r"><?php echo htmlspecialchars($laundry['layanan']); ?></td>
                         <td class="py-2 px-4 border-r"><?php echo htmlspecialchars($laundry['metode_pembayaran']); ?></td>
                         <td class="py-2 px-4 border-r"><?php echo htmlspecialchars($laundry['status']); ?></td>
-                        <td class="py-2 px-4"><?php echo htmlspecialchars($laundry['is_paid'] ? 'Yes' : 'No'); ?></td>
+                        <td class="py-2 px-4"><?php echo htmlspecialchars($laundry['is_paid'] ? 'Sudah Dibayar' : 'Belum Dibayar'); ?></td>
+                        <td class="py-2 px-4">
+                            <button type="button" onclick="showPopup(<?php echo htmlspecialchars(json_encode($laundry)); ?>)" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Detail</button>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>
                 <tr>
-                    <td colspan="6" class="text-center py-2">Tidak ada data laundry.</td>
+                    <td colspan="7" class="text-center py-2">Tidak ada data laundry.</td>
                 </tr>
             <?php endif; ?>
         </tbody>
@@ -55,5 +60,34 @@
             <?php endif; ?>
         <?php endfor; ?>
     </div>
+    
+    <script>
+        function showPopup(laundry) {
+            Swal.fire({
+                title: 'Detail Laundry',
+                html: '<p>ID: ' + laundry.id + '</p>' +
+                    '<p>Nama: ' + laundry.nama + '</p>' +
+                    '<p>Layanan: ' + laundry.layanan + '</p>' +
+                    '<p>Metode Pembayaran: ' + laundry.metode_pembayaran + '</p>' +
+                    '<p>Status: ' + laundry.status + '</p>' +
+                    '<p>Dibayar: ' + (laundry.is_paid ? 'Sudah Dibayar' : 'Belum Dibayar') + '</p>' +
+                    '<img src="./qrcodes/qris_' + laundry.id + '.png" class="w-1/2 mx-auto mt-4" onerror="this.style.display=\'none\'; document.getElementById(\'noImageText\').style.display=\'block\';" />' +
+                    '<p id="noImageText" class="text-center mt-4" style="display:none;">Nominal pembayaran belum di update</p>',
+                showCancelButton: true,
+                confirmButtonText: 'Tutup',
+                cancelButtonText: 'Kembali',
+                showLoaderOnConfirm: true,
+                preConfirm: () => {
+                    return new Promise((resolve) => {
+                        setTimeout(() => {
+                            resolve();
+                        }, 1000);
+                    });
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            });
+        }
+    </script>
 </body>
 </html>
+
