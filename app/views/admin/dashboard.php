@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" rel="stylesheet" />
+    
 </head>
 <body class="bg-gray-100 p-6">
     <div class="flex justify-between mb-4">
-        <h1 class="text-2xl font-bold">Welcome to Admin Dashboard</h1>
+        <h1 class="text-2xl font-bold">Dashboard</h1>
         <a href="/laundry-app/admin/logout" class="bg-red-500 text-white px-4 py-2 rounded">Logout</a>
     </div>
 
@@ -64,6 +66,8 @@
                     <p><strong>ID:</strong> <?php echo htmlspecialchars($laundry['id']); ?></p>
                     <p><strong>Nomor HP:</strong> <?php echo htmlspecialchars($laundry['nomor_hp']); ?></p>
                     <p><strong>Alamat:</strong> <?php echo htmlspecialchars($laundry['alamat']); ?></p>
+                    <p><strong>Jenis:</strong> <?php echo htmlspecialchars($laundry['jenis']); ?></p>
+                    <p><strong>Paket:</strong> <?php echo htmlspecialchars($laundry['paket']); ?></p>
                     <p><strong>Layanan:</strong> <?php echo htmlspecialchars($laundry['layanan']); ?></p>
                     <p><strong>Rincian Pesanan:</strong> <?php echo htmlspecialchars($laundry['rincian_pesanan']); ?></p>
                     <p><strong>Metode Pembayaran:</strong> <?php echo htmlspecialchars($laundry['metode_pembayaran']); ?></p>
@@ -71,11 +75,15 @@
                     <p><strong>Selesai:</strong> <?php echo htmlspecialchars($laundry['status']); ?></p>
                     <p><strong>Dibayar:</strong> <?php echo htmlspecialchars($laundry['is_paid'] ? 'Sudah Dibayar' : 'Belum Dibayar'); ?></p>
                     <p><strong>Biaya:</strong> Rp.<?php echo htmlspecialchars($laundry['biaya']); ?></p>
-                    <div class="mt-4 flex space-x-2">
-                        <a href="/laundry-app/admin/mark-in-progress&id=<?php echo $laundry['id']; ?>" class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600">Tandai Diproses</a>
-                        <a href="/laundry-app/admin/mark-finished&id=<?php echo $laundry['id']; ?>" class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">Tandai Selesai</a>
-                        <a href="/laundry-app/admin/mark-paid&id=<?php echo $laundry['id']; ?>" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Tandai Dibayar</a>
-                        <a href="/laundry-app/admin/delete&id=<?php echo $laundry['id']; ?>" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Hapus</a>
+                    <p><strong>Pengantaran:</strong> <?php echo htmlspecialchars($laundry['pengantaran']); ?></p>
+                    <div class="mt-4 flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0">
+                        <a href="/laundry-app/admin/mark-in-progress&id=<?php echo $laundry['id']; ?>" class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 text-center w-full sm:w-auto">Tandai Diproses</a>
+                        <a href="/laundry-app/admin/mark-finished&id=<?php echo $laundry['id']; ?>" class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 text-center w-full sm:w-auto">Tandai Selesai</a>
+                        <a href="/laundry-app/admin/mark-paid&id=<?php echo $laundry['id']; ?>" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 text-center w-full sm:w-auto">Tandai Dibayar</a>
+                    </div>
+                    <div class="mt-4 flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0 flex-1">
+                        <a href="/laundry-app/admin/delete&id=<?php echo $laundry['id']; ?>" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 text-center w-full sm:w-auto"><i class="fas fa-trash-alt mr-1"></i>Hapus</a>
+                        <a href="https://wa.me/<?php echo $laundry['nomor_hp']; ?>" target="_blank" rel="noopener noreferrer" class="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 text-center w-full sm:w-auto"><i class="fab fa-whatsapp mr-1"></i>Hubungi</a>
                     </div>
                     <form action="/laundry-app/admin/update-biaya" method="GET" class="mt-4">
                         <input type="hidden" name="id" value="<?php echo $laundry['id']; ?>">

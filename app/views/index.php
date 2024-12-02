@@ -1,254 +1,264 @@
-<html lang="en">
+<html lang="id">
  <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <title>
-   Laundry Service Landing Page
+   Halaman Utama Laundry
   </title>
   <script src="https://cdn.tailwindcss.com">
   </script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
-  <style>
-   body {
-            font-family: 'Roboto', sans-serif;
-        }
-  </style>
  </head>
- <body class="bg-gray-100">
-  <header class="bg-blue-500 shadow-md">
-   <div class="container mx-auto px-6 py-3 flex justify-between items-center">
-    <div class="text-2xl font-bold text-white">
-     LaundryService
-    </div>
-    <div class="block md:hidden">
-     <button class="text-white focus:outline-none" id="menu-button">
-      <i class="fas fa-bars">
-      </i>
-     </button>
-    </div>
-    <nav class="hidden md:flex space-x-4" id="menu">
-     <a class="text-white hover:text-gray-200" href="#">
-      Home
-     </a>
-     <a class="text-white hover:text-gray-200" href="#">
-      Services
-     </a>
-     <a class="text-white hover:text-gray-200" href="#">
-      Pricing
-     </a>
-     <a class="text-white hover:text-gray-200" href="#">
-      Contact
-     </a>
-    </nav>
-   </div>
-   <div class="md:hidden" id="mobile-menu" style="display: none;">
-    <nav class="px-6 py-3 space-y-2">
-     <a class="block text-white hover:text-gray-200" href="#">
-      Home
-     </a>
-     <a class="block text-white hover:text-gray-200" href="#">
-      Services
-     </a>
-     <a class="block text-white hover:text-gray-200" href="#">
-      Pricing
-     </a>
-     <a class="block text-white hover:text-gray-200" href="#">
-      Contact
-     </a>
+ <body class="font-roboto bg-blue-50 text-gray-800">
+  <header class="bg-blue-600 text-white p-4">
+   <div class="container mx-auto flex justify-between items-center">
+    <h1 class="text-2xl font-bold">
+     Layanan Laundry
+    </h1>
+    <nav>
+     <ul class="flex space-x-4">
+      <li>
+       <a class="hover:underline" href="#services">
+        Layanan
+       </a>
+      </li>
+      <li>
+       <a class="hover:underline" href="#pricing">
+        Harga
+       </a>
+      </li>
+      <li>
+       <a class="hover:underline" href="add">
+        Order
+       </a>
+      </li>
+     </ul>
     </nav>
    </div>
   </header>
-  <section class="bg-blue-100 h-screen flex items-center">
-   <div class="container mx-auto px-6 text-center">
-    <h1 class="text-4xl font-bold text-blue-800">
-     Professional Laundry Service
-    </h1>
-    <p class="mt-4 text-blue-700">
-     We take care of your clothes with the utmost care and precision.
-    </p>
-    <button class="mt-6 px-6 py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-500">
-     Get Started
-    </button>
-   </div>
-  </section>
-  <section class="container mx-auto px-6 py-16">
-   <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-    <div class="bg-white p-6 rounded-lg shadow-md text-center">
-     <img alt="Icon representing washing machine" class="mx-auto mb-4" height="100" src="https://storage.googleapis.com/a1aa/image/xgCBRwAlL2olMFgzS9BG59YwY0oQAO7UQVRCM6HjgVZefC2TA.jpg" width="100"/>
-     <h2 class="text-xl font-bold text-blue-800">
-      Wash &amp; Fold
+  <section class="relative bg-blue-600 text-white py-20">
+   <div class="container mx-auto flex flex-col md:flex-row items-center">
+    <div class="md:w-1/2 text-center md:text-left">
+     <h2 class="text-4xl font-bold mb-4">
+      Selamat Datang di Layanan Laundry Kami
      </h2>
-     <p class="mt-2 text-blue-700">
-      We wash, dry, and fold your clothes with care.
+     <p class="text-lg mb-6">
+      Kami menyediakan layanan laundry terbaik dengan opsi antar jemput.
      </p>
+     <a class="bg-white text-blue-600 px-6 py-3 rounded-md shadow-md hover:bg-gray-200 transition" href="#pricing">
+      Lihat Harga
+     </a>
     </div>
-    <div class="bg-white p-6 rounded-lg shadow-md text-center">
-     <img alt="Icon representing dry cleaning" class="mx-auto mb-4" height="100" src="https://storage.googleapis.com/a1aa/image/c5G9eKamCNS2YaUtyFyEuhSHTaCrzkJCaX3Neif83xw7fLYPB.jpg" width="100"/>
-     <h2 class="text-xl font-bold text-blue-800">
-      Dry Cleaning
-     </h2>
-     <p class="mt-2 text-blue-700">
-      Professional dry cleaning for your delicate garments.
-     </p>
-    </div>
-    <div class="bg-white p-6 rounded-lg shadow-md text-center">
-     <img alt="Icon representing ironing" class="mx-auto mb-4" height="100" src="https://storage.googleapis.com/a1aa/image/MYXfCfCYh0p1JETf5drvjeBeipJrkiZYe5VCw6CZxdppffC2TA.jpg" width="100"/>
-     <h2 class="text-xl font-bold text-blue-800">
-      Ironing
-     </h2>
-     <p class="mt-2 text-blue-700">
-      Expert ironing to keep your clothes wrinkle-free.
-     </p>
+    <div class="md:w-1/2 mt-8 md:mt-0">
+     <img alt="Gambar keluarga bahagia dengan pakaian bersih dan segar" class="w-full h-64 object-cover rounded-md shadow-md" height="400" src="https://storage.googleapis.com/a1aa/image/fZCl3YNXseqgYUzBvAJC2vgr5m9fPfHhWYmOKOvPxfsQMx2eE.jpg" width="600"/>
     </div>
    </div>
   </section>
-  <section class="bg-blue-100 py-16">
-   <div class="container mx-auto px-6 text-center">
-    <h2 class="text-3xl font-bold text-blue-800">
-     Our Pricing
+  <section class="container mx-auto p-6">
+   <div class="text-center mb-8">
+    <h2 class="text-3xl font-bold text-blue-600">
+     Layanan Kami
     </h2>
-    <p class="mt-4 text-blue-700">
-     Affordable and transparent pricing for all our services.
+    <p class="text-lg">
+     Kami menyediakan layanan laundry terbaik dengan opsi antar jemput.
     </p>
-    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-     <div class="bg-white p-6 rounded-lg shadow-md">
-      <h3 class="text-xl font-bold text-blue-800">
-       Basic
-      </h3>
-      <p class="mt-2 text-blue-700">
-       $10 per load
-      </p>
-      <ul class="mt-4 text-blue-700">
-       <li>
-        Wash &amp; Fold
-       </li>
-       <li>
-        Next Day Delivery
-       </li>
-      </ul>
-     </div>
-     <div class="bg-white p-6 rounded-lg shadow-md">
-      <h3 class="text-xl font-bold text-blue-800">
-       Standard
-      </h3>
-      <p class="mt-2 text-blue-700">
-       $20 per load
-      </p>
-      <ul class="mt-4 text-blue-700">
-       <li>
-        Wash &amp; Fold
-       </li>
-       <li>
-        Dry Cleaning
-       </li>
-       <li>
-        Next Day Delivery
-       </li>
-      </ul>
-     </div>
-     <div class="bg-white p-6 rounded-lg shadow-md">
-      <h3 class="text-xl font-bold text-blue-800">
-       Premium
-      </h3>
-      <p class="mt-2 text-blue-700">
-       $30 per load
-      </p>
-      <ul class="mt-4 text-blue-700">
-       <li>
-        Wash &amp; Fold
-       </li>
-       <li>
-        Dry Cleaning
-       </li>
-       <li>
-        Ironing
-       </li>
-       <li>
-        Same Day Delivery
-       </li>
-      </ul>
-     </div>
-    </div>
    </div>
-  </section>
-  <section class="container mx-auto px-6 py-16">
-   <h2 class="text-3xl font-bold text-blue-800 text-center">
-    Customer Testimonials
-   </h2>
-   <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-    <div class="bg-white p-6 rounded-lg shadow-md text-center">
-     <img alt="Portrait of a satisfied customer" class="mx-auto mb-4 rounded-full" height="100" src="https://storage.googleapis.com/a1aa/image/KQXAetJUXT1TUqGk2DgUCzH1kaSZh6rRfrWAbGR3yeD0fLYPB.jpg" width="100"/>
-     <p class="text-blue-700">
-      "Excellent service! My clothes have never been cleaner."
-     </p>
-     <p class="mt-2 text-blue-800 font-bold">
-      - John Doe
+   <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="bg-white p-4 rounded shadow mx-4">
+     <img alt="Gambar pakaian bersih dan terlipat rapi" class="w-full h-48 object-cover rounded mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/CCWXNxbhpvJqJVbYnkf3eo5TScryiA048iszc1wLZjqzC22TA.jpg" width="300"/>
+     <h3 class="text-xl font-bold text-blue-600">
+      Cuci Kering Setrika
+     </h3>
+     <p>
+      Layanan laundry lengkap termasuk mencuci, mengeringkan, dan menyetrika.
      </p>
     </div>
-    <div class="bg-white p-6 rounded-lg shadow-md text-center">
-     <img alt="Portrait of a happy customer" class="mx-auto mb-4 rounded-full" height="100" src="https://storage.googleapis.com/a1aa/image/VpVmN1UKN5qjI5e7HtZaLJfQeuZKjlV9AsEjeW2gcbNvfXweE.jpg" width="100"/>
-     <p class="text-blue-700">
-      "Fast and reliable. Highly recommend!"
-     </p>
-     <p class="mt-2 text-blue-800 font-bold">
-      - Jane Smith
+    <div class="bg-white p-4 rounded shadow mx-4">
+     <img alt="Gambar pakaian sedang dicuci di mesin cuci" class="w-full h-48 object-cover rounded mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/23uSWolPYP77EJPdMXQjBvgoWfbG2rt1Z26Vvad3H9CYBb7JA.jpg" width="300"/>
+     <h3 class="text-xl font-bold text-blue-600">
+      Cuci Kering
+     </h3>
+     <p>
+      Layanan mencuci dan mengeringkan pakaian Anda.
      </p>
     </div>
-    <div class="bg-white p-6 rounded-lg shadow-md text-center">
-     <img alt="Portrait of a pleased customer" class="mx-auto mb-4 rounded-full" height="100" src="https://storage.googleapis.com/a1aa/image/0JfNriJ3feFJvpBJ89Cc0SyT0tlP1vNYoYSoufhP1uYhfXweE.jpg" width="100"/>
-     <p class="text-blue-700">
-      "Great prices and excellent quality."
-     </p>
-     <p class="mt-2 text-blue-800 font-bold">
-      - Emily Johnson
+    <div class="bg-white p-4 rounded shadow mx-4">
+     <img alt="Gambar pakaian sedang disetrika dengan setrika uap" class="w-full h-48 object-cover rounded mb-4" height="200" src="https://storage.googleapis.com/a1aa/image/PoWGUZYvPkaQHheUjecfQUoVm6rGaOfq16GsWpvWCxEJLYbPB.jpg" width="300"/>
+     <h3 class="text-xl font-bold text-blue-600">
+      Setrika + Wangi
+     </h3>
+     <p>
+      Layanan menyetrika dengan tambahan pewangi untuk pakaian Anda.
      </p>
     </div>
    </div>
   </section>
-  <section class="container mx-auto px-6 py-16">
-   <h2 class="text-3xl font-bold text-blue-800 text-center">
-    Find Us Here
-   </h2>
-   <div class="mt-8">
-    <iframe allowfullscreen="" class="w-full h-96 rounded-lg shadow-md" frameborder="0" loading="lazy" src="https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=New+York,NY" style="border:0">
-    </iframe>
+  <section class="bg-blue-100 py-8" id="pricing">
+   <div class="container mx-auto">
+    <h2 class="text-3xl font-bold text-center text-blue-600 mb-6">
+     Harga
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+     <div class="bg-white p-6 rounded shadow-lg mx-4">
+      <h3 class="text-xl font-bold text-blue-600 mb-4">
+       Reguler 3 Hari
+      </h3>
+      <ul class="space-y-2">
+       <li class="flex justify-between items-center">
+        <span>
+         Cuci Kering Setrika
+        </span>
+        <span class="font-bold text-blue-600">
+         Rp6.000/kg
+        </span>
+       </li>
+       <li class="flex justify-between items-center">
+        <span>
+         Cuci Kering
+        </span>
+        <span class="font-bold text-blue-600">
+         Rp5.000/kg
+        </span>
+       </li>
+       <li class="flex justify-between items-center">
+        <span>
+         Setrika + Wangi
+        </span>
+        <span class="font-bold text-blue-600">
+         Rp4.000/kg
+        </span>
+       </li>
+      </ul>
+     </div>
+     <div class="bg-white p-6 rounded shadow-lg mx-4">
+      <h3 class="text-xl font-bold text-blue-600 mb-4">
+       Express Same Day 1 Hari
+      </h3>
+      <ul class="space-y-2">
+       <li class="flex justify-between items-center">
+        <span>
+         Cuci Kering Setrika
+        </span>
+        <span class="font-bold text-blue-600">
+         Rp10.000/kg
+        </span>
+       </li>
+       <li class="flex justify-between items-center">
+        <span>
+         Cuci Kering
+        </span>
+        <span class="font-bold text-blue-600">
+         Rp7.500/kg
+        </span>
+       </li>
+       <li class="flex justify-between items-center">
+        <span>
+         Setrika + Wangi
+        </span>
+        <span class="font-bold text-blue-600">
+         Rp5.000/kg
+        </span>
+       </li>
+      </ul>
+     </div>
+     <div class="bg-white p-6 rounded shadow-lg mx-4">
+      <h3 class="text-xl font-bold text-blue-600 mb-4">
+       Express 6-8 Jam
+      </h3>
+      <ul class="space-y-2">
+       <li class="flex justify-between items-center">
+        <span>
+         Cuci Kering Setrika
+        </span>
+        <span class="font-bold text-blue-600">
+         Rp15.000/kg
+        </span>
+       </li>
+       <li class="flex justify-between items-center">
+        <span>
+         Cuci Kering
+        </span>
+        <span class="font-bold text-blue-600">
+         Rp12.500/kg
+        </span>
+       </li>
+       <li class="flex justify-between items-center">
+        <span>
+         Setrika + Wangi
+        </span>
+        <span class="font-bold text-blue-600">
+         Rp10.000/kg
+        </span>
+       </li>
+      </ul>
+     </div>
+    </div>
+    <div class="mt-8">
+     <h3 class="text-2xl font-bold text-blue-600 mb-4">
+      Pilihan Tambahan
+     </h3>
+     <ul class="space-y-2 mx-4">
+      <li class="flex justify-between items-center">
+       <span>
+        Bed cover besar
+       </span>
+       <span class="font-bold text-blue-600">
+        Rp40.000
+       </span>
+      </li>
+      <li class="flex justify-between items-center">
+       <span>
+        Bed cover kecil
+       </span>
+       <span class="font-bold text-blue-600">
+        Rp30.000
+       </span>
+      </li>
+      <li class="flex justify-between items-center">
+       <span>
+        Selimut/sprei
+       </span>
+       <span class="font-bold text-blue-600">
+        Rp20.000
+       </span>
+      </li>
+     </ul>
+    </div>
    </div>
   </section>
-  <footer class="bg-blue-600 py-6">
-   <div class="container mx-auto px-6 text-center text-white">
-    <p>
-     © 2023 LaundryService. All rights reserved.
-    </p>
-    <div class="mt-4 space-x-4">
-     <a class="text-white hover:text-gray-200" href="#">
-      <i class="fab fa-facebook-f">
-      </i>
-     </a>
-     <a class="text-white hover:text-gray-200" href="#">
-      <i class="fab fa-twitter">
-      </i>
-     </a>
-     <a class="text-white hover:text-gray-200" href="#">
-      <i class="fab fa-instagram">
-      </i>
-     </a>
-     <a class="text-white hover:text-gray-200" href="#">
-      <i class="fab fa-linkedin-in">
-      </i>
+  <section class="container mx-auto p-6" id="contact">
+   <div class="flex flex-col md:flex-row justify-between items-center">
+    <div class="mb-6 md:mb-0 md:w-1/2">
+     <h3 class="text-xl font-bold text-blue-600 mb-4">
+      Kelebihan Kami
+     </h3>
+     <ul class="space-y-2">
+      <li>
+       Layanan antar jemput
+      </li>
+      <li>
+       Proses cepat dan tepat waktu
+      </li>
+      <li>
+       Harga terjangkau
+      </li>
+      <li>
+       Kualitas terbaik
+      </li>
+     </ul>
+    </div>
+    <div class="md:w-1/2">
+     <a class="w-full bg-blue-600 text-white p-2 rounded-md shadow-sm hover:bg-blue-700 text-center block" href="https://example.com/order">
+      Menuju Halaman Pemesanan
      </a>
     </div>
    </div>
+  </section>
+  <footer class="bg-blue-600 text-white p-4 text-center">
+   <p>
+    © 2023 Layanan Laundry. Semua hak dilindungi.
+   </p>
   </footer>
-  <script>
-   document.getElementById('menu-button').addEventListener('click', function() {
-        var menu = document.getElementById('mobile-menu');
-        if (menu.style.display === 'none' || menu.style.display === '') {
-            menu.style.display = 'block';
-        } else {
-            menu.style.display = 'none';
-        }
-    });
-  </script>
  </body>
 </html>

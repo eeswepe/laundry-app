@@ -16,12 +16,13 @@ class LaundryController {
     public function add() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nama = $_POST['nama'];
-            $nomor_hp = $_POST['nomor_hp'];
+            $nomor_hp = '62' . substr($_POST['nomor_hp'], 1);
             $alamat = $_POST['alamat'];
             $layanan = $_POST['layanan'];
             $rincian_pesanan = $_POST['rincian_pesanan'];
             $payment_method = $_POST['metode_pembayaran'];
-            $this->laundryModel->addLaundry($nama, $nomor_hp, $alamat, $layanan, $rincian_pesanan, $payment_method);
+            $pengantaran = $_POST['pengantaran']; 
+            $this->laundryModel->addLaundry($nama, $nomor_hp, $alamat, $layanan, $rincian_pesanan, $payment_method, $pengantaran);
             header("Location: /laundry-app/list");
             exit();
         }

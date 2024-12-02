@@ -6,14 +6,17 @@ class Laundry {
         $this->pdo = $pdo;
     }
 
-    public function addLaundry($nama, $owner, $alamat, $layanan, $rincian_pesanan, $payment_method) {
-        $stmt = $this->pdo->prepare("INSERT INTO orders (nama, nomor_hp, alamat, layanan, rincian_pesanan, metode_pembayaran, status, is_paid, biaya) VALUES (:nama, :owner, :alamat, :layanan, :rincian_pesanan, :payment_method, 'Belum Diproses', 0, 0)");
+    public function addLaundry($nama, $owner, $alamat, $layanan, $rincian_pesanan, $payment_method, $pengantaran) {
+        $stmt = $this->pdo->prepare("INSERT INTO orders (nama, nomor_hp, alamat, jenis, paket, layanan, rincian_pesanan, pengantaran, metode_pembayaran, status, is_paid, biaya) VALUES (:nama, :nomor_hp, :alamat, :jenis, :paket, :layanan, :rincian_pesanan, :pengantaran, :payment_method, 'Belum Diproses', 0, 0)");
         $stmt->execute([
             ':nama' => $nama,
-            ':owner' => $owner,
+            ':nomor_hp' => $owner,
             ':alamat' => $alamat,
+            ':jenis' => $_POST['jenis'],
+            ':paket' => $_POST['paket'],
             ':layanan' => $layanan,
             ':rincian_pesanan' => $rincian_pesanan,
+            ':pengantaran' => $pengantaran,
             ':payment_method' => $payment_method
         ]);
     }
@@ -43,6 +46,10 @@ class Laundry {
         $stmt = $this->pdo->prepare("DELETE FROM orders WHERE id = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
+        $filePath = 'qrcodes/qris_' . $id . '.png';
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
     }
 
     public function updateLaundryStatus($id, $status) {
@@ -66,17 +73,17 @@ class Laundry {
     }
 
     public function getNotProcessedLaundryCount(){
-        $stmt = $this->pdo->query("SELECT COUNT(*) FROM orders WHERE status = 'Not Processed'");
+        $stmt = $this->pdo->query("SELECT COUNT(*) FROM orders WHERE status = 'Belum Diproses'");
         return $stmt->fetchColumn();
     }
 
     public function getInProgressLaundryCount(){
-        $stmt = $this->pdo->query("SELECT COUNT(*) FROM orders WHERE status = 'In Progress'");
+        $stmt = $this->pdo->query("SELECT COUNT(*) FROM orders WHERE status = 'Sedang Diproses'");
         return $stmt->fetchColumn();
     }
 
     public function getFinishedLaundryCount(){
-        $stmt = $this->pdo->query("SELECT COUNT(*) FROM orders WHERE status = 'Finished'");
+        $stmt = $this->pdo->query("SELECT COUNT(*) FROM orders WHERE status = 'Selesai'");
         return $stmt->fetchColumn();
     }
 
